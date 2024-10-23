@@ -1,57 +1,115 @@
 import inquirer from 'inquirer';
+import client from "../config/connection.js";
 import 'console.table';
 
-import { getAllShops, getAllUsers, c } from './query.js'
+// import { getAllShops, getAllUsers, c } from './query.js'
 
 
 let showWelcome = false;
 
-export async function addShop() {
-    // const rows = [
-    //     {
-    //         id: 1,
-    //         user_name: 'Bob Smith'
-    //     },
-    //     {
-    //         id: 2,
-    //         user_name: 'Jane Doe'
-    //     }
-    // ]
-    const usersArray = await getAllUsers();
-    const {user_id, name, address} = await inquirer.prompt([
-        {
-          message: 'Please select the owner of the shop',
-          name: 'user_id',
-          type: 'list',
-          choices: usersArray.map((userObj) => {
-            return {
-              name: userObj.user_name,
-              value: userObj.id
-            }
-          })
-        },
-        {
-          message: 'Enter the shop name',
-          name: 'name',
-          type: 'input'
-        },
-        {
-          message: 'Enter the shop address',
-          name: 'address',
-          type: 'input'
-        }
-      ]);
+export async function showAllDepts() {
+  const sql = `
+  SELECT
+  * FROM departments`;
 
-await createShop(user_id, name, address)
+  const { rows } = await client.query(sql);
+  console.table('get all dept', rows)
+  return rows;
+}
 
-console.log('\n Shop created successfully!\n')
 
-    }
+export async function viewAllRoles() {
+  const sql = `
+  SELECT
+  * FROM roles`;
 
-export async function showAllShops() {
-    const shopRowsArray = await getAllShops();
-    console.table(shopRowsArray)
-};
+  const { rows } = await client.query(sql);
+  console.table('get all roles', rows)
+  return rows;
+  
+}
+
+export async function viewAllEmployees() {
+  const sql = `
+  SELECT
+  * FROM employees`;
+
+  const { rows } = await client.query(sql);
+  console.table('get all employees', rows)
+  return rows;
+  
+}export async function addDept() {
+
+  
+}
+export async function addRole() {
+
+  
+}
+export async function addEmployee() {
+
+  
+}
+
+export async function updateEmployee() {
+
+  
+}
+
+
+
+
+
+
+
+
+
+// export async function addShop() {
+//     // const rows = [
+//     //     {
+//     //         id: 1,
+//     //         user_name: 'Bob Smith'
+//     //     },
+//     //     {
+//     //         id: 2,
+//     //         user_name: 'Jane Doe'
+//     //     }
+//     // ]
+//     const usersArray = await getAllUsers();
+//     const {user_id, name, address} = await inquirer.prompt([
+//         {
+//           message: 'Please select the owner of the shop',
+//           name: 'user_id',
+//           type: 'list',
+//           choices: usersArray.map((userObj) => {
+//             return {
+//               name: userObj.user_name,
+//               value: userObj.id
+//             }
+//           })
+//         },
+//         {
+//           message: 'Enter the shop name',
+//           name: 'name',
+//           type: 'input'
+//         },
+//         {
+//           message: 'Enter the shop address',
+//           name: 'address',
+//           type: 'input'
+//         }
+//       ]);
+
+// await createShop(user_id, name, address)
+
+// console.log('\n Shop created successfully!\n')
+
+//     }
+
+// export async function showAllShops() {
+//     const shopRowsArray = await getAllShops();
+//     console.table(shopRowsArray)
+// };
 
 
 export async function showMainMenu() {
@@ -94,6 +152,10 @@ export async function showMainMenu() {
                 name: 'Update An Employee',
                 value: updateEmployee
             },
+            {
+              name: 'Quit',
+              value: 0
+            }
           ]
     });
 

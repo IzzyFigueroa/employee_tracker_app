@@ -9,31 +9,35 @@ CREATE DATABASE employee_tracker_app;
 
 \c employee_tracker_app;
 
-
-CREATE TABLE employees (
-    employee_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(200) NOT NULL,
-    last_name VARCHAR(200) NOT NULL,
-    title VARCHAR(250) UNIQUE NOT NULL,
-    dept_id INT,
-    salary INT,
-    manager_id INT
-    -- FOREIGN KEY (manager_id) REFERENCES users (id)
-    --     ON DELETE SET NULL
-);
-
-CREATE TABLE roles (
-    role_id SERIAL PRIMARY KEY,
-    job_title VARCHAR(200) NOT NULL,
-    dept_id VARCHAR(200) NOT NULL,
-    salary INT NOT NULL
-    -- FOREIGN KEY (user_id) REFERENCES users(id)
-    -- ON DELETE CASCADE
-);
-
-CREATE TABLE departments (
-    department_id SERIAL PRIMARY KEY,
-   dept_name VARCHAR(200) NOT NULL
+CREATE TABLE department (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30) UNIQUE NOT NULL
    
 );
+
+
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(30) UNIQUE NOT NULL,
+    salary DECIMAL NOT NULL,
+    dept_id INT NOT NULL,
+    FOREIGN KEY (dept_id) REFERENCES department(id)
+    ON DELETE CASCADE
+    
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT  NOT NULL,
+    manager_id INT,
+     FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (manager_id) REFERENCES employees(id)
+        ON DELETE SET NULL
+);
+
+
+
+
 

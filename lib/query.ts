@@ -1,5 +1,5 @@
 import client from "../config/connection.js";
-export async function getAllShops() {
+export async function getAllDepts() {
     const sql = `
     SELECT
     shops.id AS shop_id,
