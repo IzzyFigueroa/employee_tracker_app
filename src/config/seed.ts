@@ -12,6 +12,5 @@ console.log('tables created successfully')
 const seedSQL = await fs.readFile(path.join(__dirname, './db/seed.sql'), 'utf-8');
 await client.query(seedSQL);
 console.log('tables seeded successfully')
-
 process.exit()
 
