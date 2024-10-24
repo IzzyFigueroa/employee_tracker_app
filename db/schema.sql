@@ -1,18 +1,17 @@
-\c postgres;
+-- \c postgres;
 
-DROP DATABASE IF EXISTS employee_tracker_app;
-CREATE DATABASE employee_tracker_app;
+-- DROP DATABASE IF EXISTS employee_tracker_app;
+-- CREATE DATABASE employee_tracker_app;
 /*when we type this it will delte previous data and start new*/
--- DROP TABLE IF EXISTS departments;
--- DROP TABLE IF EXISTS roles;
--- DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS department;
 
-\c employee_tracker_app;
+-- \c employee_tracker_app;
 
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
     name VARCHAR(30) UNIQUE NOT NULL
-   
 );
 
 
@@ -22,7 +21,7 @@ CREATE TABLE roles (
     salary DECIMAL NOT NULL,
     dept_id INT NOT NULL,
     FOREIGN KEY (dept_id) REFERENCES department(id)
-    ON DELETE CASCADE
+     ON DELETE CASCADE
     
 );
 

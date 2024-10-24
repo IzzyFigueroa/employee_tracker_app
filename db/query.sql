@@ -1,24 +1,40 @@
-\c employee_tracker_app
+-- \c employee_tracker_app
 
 -- pull all rows from shops and also attach the associated users
 
-SELECT 
- employees.id AS employee_id,
- first_name AS first_name,
- last_name AS last_name,
- title AS title
---  name AS department
+SELECT
+    employees.id AS id,
+    employees.first_name,
+    employees.last_name,
+    title,
+    name AS department_name,
+    salary,
+    CONCAT(managers.first_name, ' ', managers.last_name) AS manager
+    FROM employees
+    JOIN roles
+     ON employees.role_id = roles.id
+     JOIN department
+    ON roles.dept_id = department.id
+    LEFT JOIN employees as managers
+        ON employees.manager_id = managers.id;
+
+-- SELECT 
+--  employees.id AS employee_id,
+--  first_name AS first_name,
+--  last_name AS last_name,
+--  title AS title
+-- --  name AS department
  
 
---  first_name AS first_name,
---  last_name AS last_name
---  title AS title,
---  name AS departments,
---  salary AS salary,
---  manager_id AS manager
-FROM employees
-RIGHT JOIN roles
-    ON employees.role_id = roles.id;
+-- --  first_name AS first_name,
+-- --  last_name AS last_name
+-- --  title AS title,
+-- --  name AS departments,
+-- --  salary AS salary,
+-- --  manager_id AS manager
+-- FROM employees
+-- RIGHT JOIN roles
+--     ON employees.role_id = roles.id;
 
 -- JOIN department
 --     ON department.id = role_id;

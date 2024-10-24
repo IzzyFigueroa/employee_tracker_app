@@ -1,45 +1,77 @@
-"use strict";
-// import client from "../config/connection.js";
-// export async function getAllShops() {
-//     const sql = `
-//     SELECT
-//     shops.id AS shop_id,
-//     name AS shop_name,
-//     address AS shop_address,
-//     users.id AS user_id,
-//     CONCAT(users.first_name, ' ', users.last_name) AS user_name,
-//     users.email AS user_email,
-//     CONCAT(managers.first_name, ' ', managers.last_name) AS manager,
-//     wines.id AS wine_id,
-//     brand AS wine_brand,    
-//     type AS wine_type,
-//     region AS wine_region,
-//     price AS wine_price
-// FROM shops
-// JOIN users
-//     ON shops.user_id = users.id
-// LEFT JOIN wines
-//     ON shops.id = wines.shop_id
-// LEFT JOIN users as managers
-//     ON users.manager_id = managers.id
-//     `;
-//     const { rows } = await client.query(sql);
-//     console.log('get all shop rows', rows)
-//     return rows;
+import client from "../config/connection.js";
+import 'console.table';
+// import { updateEmployee } from "./menu.js";
+// export async function getAllEmployess() {
+// export async function updateEmployee() {
 // }
-// export async function getAllUsers() {
-//     const sql = `
-//     SELECT id, 
-//         CONCAT(first_name, ' ', last_name) AS user_name
-//     FROM users
-//     `;
-//     const { rows } = await client.query(sql)
-//     return rows;
-// }
-// export async function createShop(user_id: number, name: string, address: string) {
-//     const sql = `
-//     INSERT INTO shops (name, address, user_id) VALUES ($1, $2, $3)
-// `;
-//     await client.query(sql, [name, address, user_id])
-// }
+export async function getAllEmployees() {
+    const sql = `
+    SELECT
+    employees.id AS id,
+    employees.first_name AS first_name,
+    employees.last_name AS last_name,
+    title,
+    name AS department_name,
+    salary,
+    CONCAT(managers.first_name, ' ', managers.last_name) AS manager
+    FROM employees
+    JOIN roles
+     ON employees.role_id = roles.id
+     JOIN department
+    ON roles.dept_id = department.id
+    LEFT JOIN employees as managers
+        ON employees.manager_id = managers.id
+    `;
+    const { rows } = await client.query(sql);
+    return rows;
+}
+export async function getAllDepartments() {
+    const sql = `
+    SELECT
+    * FROM department`;
+    const { rows } = await client.query(sql);
+    return rows;
+}
+export async function getAllRoles() {
+    const sql = `
+    SELECT
+    * FROM roles`;
+    const { rows } = await client.query(sql);
+    console.table(rows);
+    return rows;
+}
+export async function createDept(name) {
+    const sql = `
+    INSERT INTO department (name) VALUES ($1)
+    `;
+    await client.query(sql, [name]);
+}
+export async function createRole(title, salary, dept_id) {
+    const sql = `
+  INSERT INTO roles (title, salary, dept_id)
+  VALUES ($1, $2, $3)
+  `;
+    const { rows } = await client.query(sql, [title, salary, dept_id]);
+    return rows;
+}
+export async function createEmployee(first_name, last_name, role_id, manager_id) {
+    const sql = `
+  INSERT INTO employees (first_name, last_name, role_id, manager_id)
+  VALUES ($1, $2, $3, $4)
+  ;
+  `;
+    const { rows } = await client.query(sql, [first_name, last_name, role_id, manager_id]);
+    return rows[0];
+}
+;
+export async function updateEmployeeInDB(employee_id, role_id, manager_id) {
+    const sql = `
+    UPDATE employees
+    SET role_id = $1, manager_id = $2
+    WHERE id = $3
+    ;
+    `;
+    const { rows } = await client.query(sql, [role_id, manager_id, employee_id]);
+    return rows[0];
+}
 //# sourceMappingURL=query.js.map

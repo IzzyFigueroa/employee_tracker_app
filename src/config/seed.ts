@@ -1,6 +1,5 @@
 import {promises as fs} from 'fs';
 import path from 'path';
-
 import client from './connection.js'
 
 const __dirname = path.resolve();
@@ -14,3 +13,4 @@ await client.query(seedSQL);
 console.log('tables seeded successfully')
 
 process.exit()
+
