@@ -23,6 +23,7 @@ export async function getAllEmployees() {
         ON employees.manager_id = managers.id
     `;
     const { rows } = await client.query(sql);
+    console.table(rows);
     return rows;
 }
 export async function getAllDepartments() {
@@ -30,12 +31,14 @@ export async function getAllDepartments() {
     SELECT
     * FROM department`;
     const { rows } = await client.query(sql);
+    console.table(rows);
     return rows;
 }
 export async function getAllRoles() {
     const sql = `
     SELECT
-    * FROM roles`;
+    * FROM Roles
+    `;
     const { rows } = await client.query(sql);
     console.table(rows);
     return rows;

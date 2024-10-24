@@ -1,8 +1,14 @@
 -- \c employee_tracker_app;
-
  DROP TABLE IF EXISTS employees;
  DROP TABLE IF EXISTS roles;
- DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS department;
+
+ 
+
+ 
+ 
+
+ 
  
  INSERT INTO department (name) VALUES 
  ('Electronics'),

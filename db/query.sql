@@ -55,25 +55,25 @@ SELECT
 --     ON roles.dept_id = department.id
 -- RIGHT JOIN employees
 --     ON employees.manager_id = employees.id;
-SELECT
-    department.id AS id,
-    name AS shop_name,
+-- SELECT
+--     department.id AS id,
+--     name AS shop_name,
 
-    employees.id AS user_id,
-    CONCAT(employees.first_name, ' ', employees.last_name) AS user_name,
-    CONCAT(managers.first_name, ' ', managers.last_name) AS manager,
-    roles.id AS role_id,
-    title AS title,
-    salary AS salary,
-    region AS wine_region,
-    price AS wine_price
-FROM department
-JOIN employees
-    ON department.id = employees.id
-JOIN roles
-    ON department.id = roles.dept_id
-LEFT JOIN users as managers
-    ON employees.manager_id = managers.id;
+--     employees.id AS user_id,
+--     CONCAT(employees.first_name, ' ', employees.last_name) AS user_name,
+--     CONCAT(managers.first_name, ' ', managers.last_name) AS manager,
+--     roles.id AS role_id,
+--     title AS title,
+--     salary AS salary,
+--     region AS wine_region,
+--     price AS wine_price
+-- FROM department
+-- JOIN employees
+--     ON department.id = employees.id
+-- JOIN roles
+--     ON department.id = roles.dept_id
+-- LEFT JOIN users as managers
+--     ON employees.manager_id = managers.id;
 
 
 

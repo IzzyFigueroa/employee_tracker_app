@@ -28,7 +28,7 @@ export async function getAllEmployees() {
     `;
 
     const {rows} = await client.query(sql);
-   
+    console.table(rows)
     return rows;
 }
 
@@ -37,13 +37,15 @@ export async function getAllEmployees() {
     SELECT
     * FROM department`;
     const {rows} = await client.query(sql);
+    console.table(rows)
     return rows;
    }
 
    export async function getAllRoles() {
     const sql = `
     SELECT
-    * FROM roles`;
+    * FROM Roles
+    `;
     const {rows} = await client.query(sql);
     console.table(rows)
     return rows;

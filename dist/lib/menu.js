@@ -1,5 +1,4 @@
 import inquirer from 'inquirer';
-// import client from "../config/connection.js";
 import { getAllEmployees, getAllDepartments, getAllRoles, createDept, createRole, createEmployee, updateEmployeeInDB } from './query.js';
 import 'console.table';
 // import { getAllShops, getAllUsers, c } from './query.js'
@@ -7,14 +6,17 @@ let showWelcome = false;
 export async function showAllDepts() {
     const deptArray = await getAllDepartments();
     console.table(deptArray);
+    return deptArray;
 }
 export async function viewAllEmployees() {
     const employeesArray = await getAllEmployees();
     console.table(employeesArray);
+    return employeesArray;
 }
 export async function viewAllRoles() {
-    const rolesArray = getAllRoles();
+    const rolesArray = await getAllRoles();
     console.table(rolesArray);
+    return rolesArray;
 }
 export async function addDept() {
     // const deptArray = await getAllDepartments();
