@@ -5,17 +5,14 @@ import 'console.table';
 let showWelcome = false;
 export async function showAllDepts() {
     const deptArray = await getAllDepartments();
-    console.table(deptArray);
     return deptArray;
 }
 export async function viewAllEmployees() {
     const employeesArray = await getAllEmployees();
-    console.table(employeesArray);
     return employeesArray;
 }
 export async function viewAllRoles() {
     const rolesArray = await getAllRoles();
-    console.table(rolesArray);
     return rolesArray;
 }
 export async function addDept() {
@@ -137,7 +134,7 @@ export async function updateEmployee() {
 }
 ;
 export async function showMainMenu() {
-    if (showWelcome) {
+    if (!showWelcome) {
         console.log('\n------ Welcome To The Shop App ------\n');
         showWelcome = true;
     }
@@ -188,26 +185,4 @@ export async function showMainMenu() {
     showMainMenu();
 }
 ;
-// export async function showMainMenu() {
-//     if (showWelcome) {
-//         console.log('\n------ Welcome To The Shop App ------\n')
-//         showWelcome = true;
-//     }
-//     const {option} = await inquirer.prompt({
-//         message: ' Please select an option',
-//         name: 'option',
-//         type: 'list',
-//         choices: ['Show All Shops', 'Add Shop', 'Show All Wines', 'Add Wine']
-//     });
-//     switch(option) {
-//         case 'Show All Shops':
-//             await showAllShops();
-//             showMainMenu();
-//             break;
-//         case "Add Shop":
-//             await addShop();
-//             showMainMenu();
-//             break;
-//     }
-// };
 //# sourceMappingURL=menu.js.map

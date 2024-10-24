@@ -1,12 +1,5 @@
 import client from "../config/connection.js";
 import 'console.table';
-// import { updateEmployee } from "./menu.js";
-// export async function getAllEmployess() {
-
-
-// export async function updateEmployee() {
-    
-// }
 
 export async function getAllEmployees() {
     const sql = `
