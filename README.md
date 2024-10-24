@@ -19,7 +19,7 @@
  Please contact me at izzyfigueroa6@gmail.com
 
   ## Description
- This is a README.md for the Employee Tracker App. This application allows the user to view all employees, departments, salaries. managers an more! New roles/departments/employees can be added. Employees can also be updated.
+ This is a README.md for the Employee Tracker App. This application allows the user to view all employees, departments, salaries. managers and more! New roles/departments/employees can be added. Employees can also be updated.
 
   ## Installation
  Users just need to type 'npm start' in their terminal
