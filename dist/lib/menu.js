@@ -1,7 +1,6 @@
 import inquirer from 'inquirer';
 import { getAllEmployees, getAllDepartments, getAllRoles, createDept, createRole, createEmployee, updateEmployeeInDB } from './query.js';
 import 'console.table';
-// import { getAllShops, getAllUsers, c } from './query.js'
 let showWelcome = false;
 export async function showAllDepts() {
     const deptArray = await getAllDepartments();
@@ -16,7 +15,6 @@ export async function viewAllRoles() {
     return rolesArray;
 }
 export async function addDept() {
-    // const deptArray = await getAllDepartments();
     const { name } = await inquirer.prompt([
         {
             message: 'Please input a department',
@@ -28,7 +26,7 @@ export async function addDept() {
     console.log('\n You have successfully added a department!\n');
 }
 export async function addRole() {
-    const departments = await getAllDepartments(); // Fetch all departments to display in the prompt
+    const departments = await getAllDepartments();
     const departmentChoices = departments.map((dept) => ({
         name: dept.name,
         value: dept.id
@@ -55,7 +53,7 @@ export async function addRole() {
     console.log('\n You have successfully added a role!\n');
 }
 export async function addEmployee() {
-    const roles = await getAllRoles(); // Fetch all roles to display in the prompt
+    const roles = await getAllRoles();
     const roleChoices = roles.map(role => ({
         name: role.title,
         value: role.id
@@ -65,7 +63,7 @@ export async function addEmployee() {
         name: `${employee.first_name} ${employee.last_name}`,
         value: employee.id
     }));
-    managerChoices.unshift({ name: 'None', value: null }); // Add an option for no manager
+    managerChoices.unshift({ name: 'None', value: null });
     const { first_name, last_name, role_id, manager_id } = await inquirer.prompt([
         {
             message: 'Please input the employee first name',
@@ -94,12 +92,12 @@ export async function addEmployee() {
     console.log(`\n You have successfully added ${first_name} ${last_name}\n`);
 }
 export async function updateEmployee() {
-    const employees = await getAllEmployees(); // Fetch all employees to display in the prompt
+    const employees = await getAllEmployees();
     const employeeChoices = employees.map(employee => ({
         name: `${employee.first_name} ${employee.last_name}`,
         value: employee.id
     }));
-    const roles = await getAllRoles(); // Fetch all roles to display in the prompt
+    const roles = await getAllRoles();
     const roleChoices = roles.map(role => ({
         name: role.title,
         value: role.id
@@ -108,7 +106,7 @@ export async function updateEmployee() {
         name: `${employee.first_name} ${employee.last_name}`,
         value: employee.id
     }));
-    managerChoices.unshift({ name: 'None', value: null }); // Add an option for no manager
+    managerChoices.unshift({ name: 'None', value: null });
     const { employee_id, role_id, manager_id } = await inquirer.prompt([
         {
             message: 'Please select the employee to update',

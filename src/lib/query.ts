@@ -2,7 +2,7 @@ import client from "../config/connection.js";
 import 'console.table';
 
 export async function getAllEmployees() {
-    const sql = `
+  const sql = `
     SELECT
     employees.id AS id,
     employees.first_name AS first_name,
@@ -20,39 +20,39 @@ export async function getAllEmployees() {
         ON employees.manager_id = managers.id
     `;
 
-    const {rows} = await client.query(sql);
-    console.table(rows)
-    return rows;
+  const { rows } = await client.query(sql);
+  console.table(rows)
+  return rows;
 }
 
-   export async function getAllDepartments() {
-    const sql = `
+export async function getAllDepartments() {
+  const sql = `
     SELECT
     * FROM department`;
-    const {rows} = await client.query(sql);
-    console.table(rows)
-    return rows;
-   }
+  const { rows } = await client.query(sql);
+  console.table(rows)
+  return rows;
+}
 
-   export async function getAllRoles() {
-    const sql = `
+export async function getAllRoles() {
+  const sql = `
     SELECT
     * FROM Roles
     `;
-    const {rows} = await client.query(sql);
-    console.table(rows)
-    return rows;
-   }
+  const { rows } = await client.query(sql);
+  console.table(rows)
+  return rows;
+}
 
-   export async function createDept(name: string) {
-    const sql = `
+export async function createDept(name: string) {
+  const sql = `
     INSERT INTO department (name) VALUES ($1)
     `;
 
-    await client.query(sql, [name])
-   }
+  await client.query(sql, [name])
+}
 
-   export async function createRole(title: string, salary: number, dept_id: number) {
+export async function createRole(title: string, salary: number, dept_id: number) {
   const sql = `
   INSERT INTO roles (title, salary, dept_id)
   VALUES ($1, $2, $3)
@@ -72,13 +72,13 @@ export async function createEmployee(first_name: string, last_name: string, role
 };
 
 export async function updateEmployeeInDB(employee_id: number, role_id: number, manager_id: number | null) {
-    const sql = `
+  const sql = `
     UPDATE employees
     SET role_id = $1, manager_id = $2
     WHERE id = $3
     ;
     `;
-    const { rows } = await client.query(sql, [role_id, manager_id, employee_id]);
-    return rows[0];
-  }
+  const { rows } = await client.query(sql, [role_id, manager_id, employee_id]);
+  return rows[0];
+}
 

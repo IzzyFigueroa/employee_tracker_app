@@ -1,13 +1,8 @@
--- \c postgres;
 
--- DROP DATABASE IF EXISTS employee_tracker_app;
--- CREATE DATABASE employee_tracker_app;
-/*when we type this it will delte previous data and start new*/
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS department;
 
--- \c employee_tracker_app;
 
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
@@ -35,8 +30,3 @@ CREATE TABLE employees (
     FOREIGN KEY (manager_id) REFERENCES employees(id)
         ON DELETE SET NULL
 );
-
-
-
-
-
